@@ -55,9 +55,9 @@ function AntigravityInner({
         position: new THREE.Vector3(x, y, z),
         basePosition: new THREE.Vector3(x, y, z),
         velocity: new THREE.Vector3(
-          (Math.random() - 0.5) * 0.02,
-          (Math.random() - 0.5) * 0.02,
-          (Math.random() - 0.5) * 0.02
+          (Math.random() - 0.5) * 0.01,
+          (Math.random() - 0.5) * 0.01,
+          (Math.random() - 0.5) * 0.01
         ),
         phase: Math.random() * Math.PI * 2,
         amplitude: Math.random() * waveAmplitude + 0.1,
@@ -74,7 +74,7 @@ function AntigravityInner({
     const time = state.clock.elapsedTime * waveSpeed;
     const boundsX = viewport.width * 0.9;
     const boundsY = viewport.height * 0.9;
-    const driftSpeed = 0.6;
+    const driftSpeed = 0.3;
 
     // Update mouse 3D position
     const vec = new THREE.Vector3(mouseRef.current.x, mouseRef.current.y, 0);
@@ -124,21 +124,21 @@ function AntigravityInner({
       let repelY = 0;
 
       if (dist < magnetRadius && dist > 0) {
-        const force = (1 - dist / magnetRadius) * 2;
+        const force = (1 - dist / magnetRadius) * 1.5;
         repelX = (dx / dist) * force;
         repelY = (dy / dist) * force;
       }
 
       // Smooth interpolation
-      particle.position.x += ((targetX + repelX) - particle.position.x) * 0.05;
-      particle.position.y += ((targetY + repelY) - particle.position.y) * 0.05;
-      particle.position.z += (targetZ - particle.position.z) * 0.05;
+      particle.position.x += ((targetX + repelX) - particle.position.x) * 0.03;
+      particle.position.y += ((targetY + repelY) - particle.position.y) * 0.03;
+      particle.position.z += (targetZ - particle.position.z) * 0.03;
 
       // Update instance
       dummy.position.copy(particle.position);
 
       // Scale based on distance to mouse
-      const scaleFactor = dist < magnetRadius ? 1 + (1 - dist / magnetRadius) * 0.5 : 1;
+      const scaleFactor = dist < magnetRadius ? 1 + (1 - dist / magnetRadius) * 0.3 : 1;
       dummy.scale.setScalar(particleSize * scaleFactor);
 
       // Rotation

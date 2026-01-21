@@ -82,6 +82,19 @@ export default function CedrikManual() {
       <div className="fixed inset-0 bg-gradient-to-b from-[#1b0b2e] via-[#0b0714] to-[#050308] pointer-events-none" />
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(106,13,173,0.28),transparent_55%),radial-gradient(circle_at_25%_80%,rgba(40,10,70,0.45),transparent_45%)] pointer-events-none" />
 
+      {/* Single Fixed Antigravity Background - Full Screen */}
+      <div className="fixed inset-0 z-0 opacity-50 pointer-events-none">
+        <Antigravity
+          particleCount={250}
+          particleSize={0.25}
+          magnetRadius={6}
+          waveSpeed={0.3}
+          waveAmplitude={0.4}
+          color="#6a0dad"
+          className="w-full h-full"
+        />
+      </div>
+
       {/* Top Right Navbar */}
       <nav
         aria-label="Section navigation"
@@ -140,19 +153,8 @@ export default function CedrikManual() {
       </nav>
 
       {/* Hero / Intro */}
-      <section className="max-w-screen-2xl mx-auto mt-6 px-4 sm:px-8 lg:px-12 grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center relative">
-        {/* Antigravity Background */}
-        <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
-          <Antigravity
-            particleCount={280}
-            particleSize={0.45}
-            magnetRadius={12}
-            waveSpeed={0.65}
-            waveAmplitude={0.55}
-            color="#6a0dad"
-            className="w-full h-full"
-          />
-        </div>
+      <section className="relative mt-6">
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-8 lg:px-12 grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center relative z-10">
         <div className="relative z-10 space-y-6">
           <p className="uppercase tracking-[0.4em] text-purple-200/70 text-xs">
             Cedrik Manual
@@ -216,25 +218,14 @@ export default function CedrikManual() {
             </p>
           </CardContent>
         </Card>
+        </div>
       </section>
 
       {/* Video Walkthroughs Carousel */}
-      <section id="overview" className="max-w-5xl mx-auto mt-16 relative pb-28 scroll-mt-24">
-        <div className="absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 z-0 opacity-55 pointer-events-none">
-          <Antigravity
-            particleCount={320}
-            particleSize={0.24}
-            magnetRadius={9}
-            waveSpeed={0.6}
-            waveAmplitude={0.35}
-            color="#7a1fd2"
-            className="w-full h-full"
-          />
-        </div>
-        <div className="relative z-10">
-          <h2 className="text-5xl sm:text-6xl font-black tracking-tight text-center mb-12">
-            Take a Quick Look
-          </h2>
+      <section id="overview" className="max-w-5xl mx-auto mt-16 relative pb-28 scroll-mt-24 z-10">
+        <h2 className="text-5xl sm:text-6xl font-black tracking-tight text-center mb-12">
+          Take a Quick Look
+        </h2>
           <p className="text-purple-100/70 text-center max-w-2xl mx-auto -mt-6 mb-10">
             Quick previews of key features, workflows, and dashboards you can explore in minutes.
           </p>
@@ -304,11 +295,10 @@ export default function CedrikManual() {
               ))}
             </div>
           </div>
-        </div>
       </section>
 
       {/* CEDRIK Walkthrough */}
-      <section id="walkthrough" className="max-w-6xl mx-auto mt-48 pt-4 space-y-10 relative z-10 scroll-mt-24">
+      <section id="walkthrough" className="max-w-6xl mx-auto mt-48 pt-4 space-y-10 relative scroll-mt-24 z-10">
         <div className="text-center space-y-4">
           <h2 className="text-4xl sm:text-5xl font-bold">CEDRIK Walkthrough</h2>
           <p className="text-purple-100/70 max-w-2xl mx-auto">
@@ -417,7 +407,7 @@ export default function CedrikManual() {
       </section>
 
       {/* Performance Analysis */}
-      <section id="performance" className="max-w-5xl mx-auto mt-28 space-y-8 relative scroll-mt-24">
+      <section id="performance" className="max-w-5xl mx-auto mt-28 space-y-8 relative scroll-mt-24 z-10">
         <div className="text-center space-y-4">
           <h2 className="text-4xl sm:text-5xl font-bold">Performance Analysis</h2>
           <p className="text-purple-100/70 max-w-2xl mx-auto">
@@ -457,7 +447,7 @@ export default function CedrikManual() {
       </section>
 
       {/* Feature Guide */}
-      <section id="capabilities" className="max-w-4xl mx-auto mt-40 space-y-8 relative scroll-mt-24">
+      <section id="capabilities" className="max-w-4xl mx-auto mt-40 space-y-8 relative scroll-mt-24 z-10">
         <h2 className="text-4xl font-bold text-center mb-12">Core Capabilities</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -480,7 +470,7 @@ export default function CedrikManual() {
       </section>
 
       {/* Footer */}
-      <footer className="max-w-5xl mx-auto mt-24 text-center text-slate-500 text-sm relative">
+      <footer className="max-w-5xl mx-auto mt-24 text-center text-slate-500 text-sm relative z-10">
         © {new Date().getFullYear()} Cedrik Systems · Cybersecurity AI
       </footer>
 
