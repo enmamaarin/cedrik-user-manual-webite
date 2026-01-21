@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PlayCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import cedrikLogo from "@/assets/cedrik-logo.png";
+import performanceImage from "@/assets/Performance.png";
 import gettingStartedVideo from "@/assets/Getting-Started.mp4";
 import gettingStartedThumb from "@/assets/Thumbnail GS.png";
 import adminDashboardVideo from "@/assets/Admin-Dashboard-Overview.mp4";
@@ -75,10 +76,35 @@ export default function CedrikManual() {
     return "pos-hidden";
   };
   return (
-    <div className="min-h-screen bg-[#0b0714] text-white px-3 sm:px-5 lg:px-8 py-12 relative overflow-hidden">
+    <div id="home" className="min-h-screen bg-[#0b0714] text-white px-3 sm:px-5 lg:px-8 py-12 relative overflow-hidden">
       {/* Atmospheric background */}
       <div className="fixed inset-0 bg-gradient-to-b from-[#1b0b2e] via-[#0b0714] to-[#050308] pointer-events-none" />
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(106,13,173,0.28),transparent_55%),radial-gradient(circle_at_25%_80%,rgba(40,10,70,0.45),transparent_45%)] pointer-events-none" />
+
+      {/* Top Right Navbar */}
+      <nav
+        aria-label="Section navigation"
+        className="fixed top-4 right-4 z-40 flex items-center gap-2 bg-black/40 border border-white/10 backdrop-blur-xl rounded-full px-3 py-2 shadow-[0_12px_30px_rgba(0,0,0,0.35)]"
+      >
+        {[
+          { label: "Home", href: "#home" },
+          { label: "Overview", href: "#overview" },
+          { label: "Walkthrough", href: "#walkthrough" },
+          { label: "Performance Analysis", href: "#performance" },
+          { label: "Capabilities", href: "#capabilities" },
+        ].map((item) => (
+          <div key={item.label} className="group">
+            {item.href ? (
+              <a
+                href={item.href}
+                className="relative block px-3 py-1.5 text-[11px] uppercase tracking-[0.22em] text-white/80 rounded-full border border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-300/60 hover:text-white hover:bg-white/10"
+              >
+                <span className="relative z-10">{item.label}</span>
+              </a>
+            ) : null}
+          </div>
+        ))}
+      </nav>
       
       {/* Hero / Intro */}
       <section className="max-w-screen-2xl mx-auto mt-6 px-4 sm:px-8 lg:px-12 grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center relative">
@@ -119,7 +145,7 @@ export default function CedrikManual() {
           </div>
           <div className="flex flex-wrap gap-4">
             <Button className="bg-purple-600/90 hover:bg-purple-600 text-purple-50 font-semibold px-6">
-              Brief Overview
+              Try CEDRIK Now
             </Button>
             <Button className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-6">
               View Walkthrough
@@ -153,7 +179,7 @@ export default function CedrikManual() {
       </section>
 
       {/* Video Walkthroughs Carousel */}
-      <section className="max-w-5xl mx-auto mt-24 relative pb-28">
+      <section id="overview" className="max-w-5xl mx-auto mt-16 relative pb-28 scroll-mt-24">
         <div className="absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 z-0 opacity-55 pointer-events-none">
           <Antigravity
             particleCount={320}
@@ -243,7 +269,7 @@ export default function CedrikManual() {
       </section>
 
       {/* CEDRIK Walkthrough */}
-      <section className="max-w-6xl mx-auto mt-36 pt-8 space-y-10 relative z-10">
+      <section id="walkthrough" className="max-w-6xl mx-auto mt-48 pt-4 space-y-10 relative z-10 scroll-mt-24">
         <div className="text-center space-y-4">
           <h2 className="text-4xl sm:text-5xl font-bold">CEDRIK Walkthrough</h2>
           <p className="text-purple-100/70 max-w-2xl mx-auto">
@@ -351,8 +377,48 @@ export default function CedrikManual() {
         </div>
       </section>
 
+      {/* Performance Analysis */}
+      <section id="performance" className="max-w-5xl mx-auto mt-28 space-y-8 relative scroll-mt-24">
+        <div className="text-center space-y-4">
+          <h2 className="text-4xl sm:text-5xl font-bold">Performance Analysis</h2>
+          <p className="text-purple-100/70 max-w-2xl mx-auto">
+            A quick look at system accuracy and reliability highlights, aligned with CEDRIK's
+            learning and security objectives.
+          </p>
+        </div>
+        <Card className="bg-white/5 backdrop-blur-xl border-white/10 overflow-hidden">
+          <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-0">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-purple-500/10 to-purple-800/20" />
+              <img
+                src={performanceImage}
+                alt="Performance analysis preview"
+                className="relative w-full h-full object-cover"
+              />
+            </div>
+            <div className="p-8 sm:p-10 space-y-5">
+              <h3 className="text-2xl font-semibold text-white">
+                TruthfulQA Performance Snapshot
+              </h3>
+              <p className="text-purple-100/75 leading-relaxed">
+                Review a concise benchmark report that summarizes how CEDRIK performs on
+                TruthfulQA, presented with the same visual language as the manual.
+              </p>
+              <Button
+                className="bg-purple-600/90 hover:bg-purple-600 text-purple-50 font-semibold"
+                onClick={() => {
+                  window.open("/CEDRIK_TruthfulQA_Simple.html", "_blank", "noopener,noreferrer");
+                }}
+              >
+                Open Performance Report
+              </Button>
+            </div>
+          </div>
+        </Card>
+      </section>
+
       {/* Feature Guide */}
-      <section className="max-w-4xl mx-auto mt-40 space-y-8 relative">
+      <section id="capabilities" className="max-w-4xl mx-auto mt-40 space-y-8 relative scroll-mt-24">
         <h2 className="text-4xl font-bold text-center mb-12">Core Capabilities</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
