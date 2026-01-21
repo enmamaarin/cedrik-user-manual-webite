@@ -219,3 +219,57 @@ button, a, .transition-all {
     transform: translateX(-60%) translateZ(-120px);
   }
 }
+
+.split-text {
+  display: inline-block;
+}
+
+.split-text__word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.3em);
+  filter: blur(2px);
+  animation: splitTextReveal 0.7s cubic-bezier(0.18, 1, 0.22, 1) forwards;
+  animation-fill-mode: both;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes splitTextReveal {
+  from {
+    opacity: 0;
+    transform: translateY(0.3em);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.blur-text {
+  display: inline-block;
+}
+
+.blur-text__word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(0.35em);
+  animation: blurTextReveal 0.9s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+  animation-fill-mode: both;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes blurTextReveal {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
