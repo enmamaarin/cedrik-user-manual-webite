@@ -32,17 +32,24 @@ function AntigravityInner({
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const mouseRef = useRef(new THREE.Vector2(0, 0));
   const mouse3D = useRef(new THREE.Vector3(0, 0, 0));
+  const isTouchDevice = useRef(false);
   const { viewport, camera } = useThree();
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
   useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      mouseRef.current.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouseRef.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    };
+    // Detect touch device
+    isTouchDevice.current = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    // Only add mouse tracking on non-touch devices
+    if (!isTouchDevice.current) {
+      const handleMouseMove = (event: MouseEvent) => {
+        mouseRef.current.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouseRef.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      };
+
+      window.addEventListener("mousemove", handleMouseMove);
+      return () => window.removeEventListener("mousemove", handleMouseMove);
+    }
   }, []);
 
   const particles = useMemo(() => {
@@ -118,18 +125,20 @@ function AntigravityInner({
       const targetY = particle.basePosition.y + waveY;
       const targetZ = particle.basePosition.z;
 
-      // Mouse repulsion (disabled on touch devices for performance)
-      const dx = particle.position.x - mouse3D.current.x;
-      const dy = particle.position.y - mouse3D.current.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
+      // Mouse repulsion (only on desktop, disabled on touch devices)
       let repelX = 0;
       let repelY = 0;
 
-      if (dist < magnetRadius && dist > 0) {
-        const force = (1 - dist / magnetRadius) * 1;
-        repelX = (dx / dist) * force;
-        repelY = (dy / dist) * force;
+      if (!isTouchDevice.current) {
+        const dx = particle.position.x - mouse3D.current.x;
+        const dy = particle.position.y - mouse3D.current.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < magnetRadius && dist > 0) {
+          const force = (1 - dist / magnetRadius) * 1;
+          repelX = (dx / dist) * force;
+          repelY = (dy / dist) * force;
+        }
       }
 
       // Smooth interpolation with delta time
@@ -154,21 +163,8 @@ function AntigravityInner({
     meshRef.current.instanceMatrix.needsUpdate = true;
   });
 
-  // Handle mouse move
-  const handlePointerMove = (e: THREE.Event) => {
-    const event = e as unknown as { clientX: number; clientY: number };
-    mouseRef.current.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouseRef.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
-  };
-
   return (
-    <group onPointerMove={handlePointerMove}>
-      {/* Invisible plane to capture mouse events */}
-      <mesh position={[0, 0, -5]}>
-        <planeGeometry args={[100, 100]} />
-        <meshBasicMaterial transparent opacity={0} />
-      </mesh>
-
+    <group>
       <instancedMesh ref={meshRef} args={[undefined, undefined, particleCount]}>
         <sphereGeometry args={[1, 6, 6]} />
         <meshBasicMaterial color={color} transparent opacity={0.6} />
@@ -200,18 +196,10 @@ export default function Antigravity({
     <Canvas
       className={className}
       camera={{ position: [0, 0, 50], fov: 35 }}
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", touchAction: "auto" }}
       dpr={[1, 1.5]}
       performance={{ min: 0.5 }}
       gl={{ antialias: false, powerPreference: "high-performance" }}
-      onPointerMove={(e) => {
-        // Propagate mouse events to the scene
-        const canvas = e.target as HTMLCanvasElement;
-        const rect = canvas.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-        const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-        canvas.dispatchEvent(new CustomEvent("mousemove3d", { detail: { x, y } }));
-      }}
     >
       <AntigravityInner
         particleCount={particleCount}
