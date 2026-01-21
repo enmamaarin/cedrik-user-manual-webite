@@ -1,73 +1,72 @@
-# React + TypeScript + Vite
+# CEDRIK – User Manual (React + TypeScript)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CEDRIK User Manual is a **single-page React application** that serves as an interactive guide and documentation hub for the CEDRIK Cybersecurity AI platform.  
+It combines video walkthroughs and structured explanations to help users understand and properly use the system.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✦ Project Overview
 
-## React Compiler
+This project is designed as:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- A **one-page documentation site**
+- Built with **React + TypeScript**
+- Styled using **Tailwind CSS** and **shadcn/ui**
+- Optimized for clarity, onboarding, and scalability
+- Suitable for internal manuals, SaaS onboarding, or enterprise tools
 
-## Expanding the ESLint configuration
+The UI follows a **dark cybersecurity theme** to align with CEDRIK’s identity.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ✦ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **React** (Vite)
+- **TypeScript**
+- **Tailwind CSS**
+- **shadcn/ui**
+- **Lucide Icons**
+- **Vite** (build & dev server)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ✦ Project Structure
+cedrik-manual/
+│
+├─ src/
+│ ├─ components/
+│ │ └─ ui/
+│ │ ├─ button.tsx
+│ │ └─ card.tsx
+│ │
+│ ├─ pages/
+│ │ └─ CedrikManual.tsx
+│ │
+│ ├─ App.tsx
+│ ├─ main.tsx
+│ └─ index.css
+│
+├─ vite.config.ts
+├─ tailwind.config.js
+├─ tsconfig.json
+├─ components.json
+└─ README.md
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ✦ Features
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- 📘 **Product introduction section**
+- 🎥 **Video walkthrough cards** (ready for YouTube/Vimeo embeds)
+- 🧠 **Feature guide / manual section**
+- 🌙 **Dark mode by default**
+- 🧩 **Reusable UI components**
+- 📱 **Responsive layout**
+
+✦ License
+
+Internal use – CEDRIK Systems
+All rights reserved.
+
+✦ Maintained By
+
+CEDRIK Systems
+Cybersecurity AI Platform
