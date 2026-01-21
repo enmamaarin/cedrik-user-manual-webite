@@ -24,11 +24,23 @@ import Antigravity from "@/components/ui/Antigravity";
 export default function CedrikManual() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const [activeVideo, setActiveVideo] = useState<{
     title: string;
     src: string;
     details?: string;
   } | null>(null);
+
+  useEffect(() => {
+    // Check if desktop (screen width >= 1024px)
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop);
+    return () => window.removeEventListener('resize', checkDesktop);
+  }, []);
 
   useEffect(() => {
     if (activeVideo) {
@@ -82,18 +94,20 @@ export default function CedrikManual() {
       <div className="fixed inset-0 bg-gradient-to-b from-[#1b0b2e] via-[#0b0714] to-[#050308] pointer-events-none" />
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(106,13,173,0.28),transparent_55%),radial-gradient(circle_at_25%_80%,rgba(40,10,70,0.45),transparent_45%)] pointer-events-none" />
 
-      {/* Single Fixed Antigravity Background - Full Screen */}
-      <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
-        <Antigravity
-          particleCount={80}
-          particleSize={0.3}
-          magnetRadius={5}
-          waveSpeed={0.15}
-          waveAmplitude={0.2}
-          color="#6a0dad"
-          className="w-full h-full"
-        />
-      </div>
+      {/* Single Fixed Antigravity Background - Desktop Only */}
+      {isDesktop && (
+        <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
+          <Antigravity
+            particleCount={80}
+            particleSize={0.3}
+            magnetRadius={5}
+            waveSpeed={0.15}
+            waveAmplitude={0.2}
+            color="#6a0dad"
+            className="w-full h-full"
+          />
+        </div>
+      )}
 
       {/* Top Right Navbar */}
       <nav
