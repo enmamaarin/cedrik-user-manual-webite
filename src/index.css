@@ -139,3 +139,61 @@ button:focus-visible {
     @apply bg-background text-foreground;
   }
 }
+
+.carousel-3d {
+  position: relative;
+  height: 22rem;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.carousel-card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(40rem, 90%);
+  transform-origin: center;
+  transition: transform 420ms ease, opacity 420ms ease, box-shadow 420ms ease;
+  transform: translateX(-50%) translateZ(-250px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.carousel-card.pos-active {
+  transform: translateX(-50%) translateZ(0);
+  opacity: 1;
+  box-shadow: 0 13px 26px rgba(0, 0, 0, 0.3), 0 12px 6px rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+}
+
+.carousel-card.pos-next {
+  transform: translateX(-35%) translateZ(-120px);
+  opacity: 0.8;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3), 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-card.pos-prev {
+  transform: translateX(-65%) translateZ(-120px);
+  opacity: 0.8;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3), 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-card.pos-hidden {
+  transform: translateX(-50%) translateZ(-260px);
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .carousel-3d {
+    height: 20rem;
+  }
+  .carousel-card {
+    width: 100%;
+  }
+  .carousel-card.pos-next {
+    transform: translateX(-40%) translateZ(-120px);
+  }
+  .carousel-card.pos-prev {
+    transform: translateX(-60%) translateZ(-120px);
+  }
+}
