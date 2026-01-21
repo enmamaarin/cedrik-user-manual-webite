@@ -83,13 +83,13 @@ export default function CedrikManual() {
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(106,13,173,0.28),transparent_55%),radial-gradient(circle_at_25%_80%,rgba(40,10,70,0.45),transparent_45%)] pointer-events-none" />
 
       {/* Single Fixed Antigravity Background - Full Screen */}
-      <div className="fixed inset-0 z-0 opacity-50 pointer-events-none">
+      <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
         <Antigravity
-          particleCount={250}
-          particleSize={0.25}
-          magnetRadius={6}
-          waveSpeed={0.3}
-          waveAmplitude={0.4}
+          particleCount={80}
+          particleSize={0.3}
+          magnetRadius={5}
+          waveSpeed={0.15}
+          waveAmplitude={0.2}
           color="#6a0dad"
           className="w-full h-full"
         />

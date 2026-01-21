@@ -68,13 +68,16 @@ function AntigravityInner({
     return temp;
   }, [particleCount, viewport.width, viewport.height, waveAmplitude]);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (!meshRef.current) return;
 
+    // Use delta time for frame-rate independent animation
+    const smoothDelta = Math.min(delta, 0.1);
     const time = state.clock.elapsedTime * waveSpeed;
     const boundsX = viewport.width * 0.9;
     const boundsY = viewport.height * 0.9;
-    const driftSpeed = 0.3;
+    const driftSpeed = 0.1;
+    const lerpFactor = 0.02 * (smoothDelta * 60);
 
     // Update mouse 3D position
     const vec = new THREE.Vector3(mouseRef.current.x, mouseRef.current.y, 0);
@@ -85,8 +88,8 @@ function AntigravityInner({
 
     particles.forEach((particle, i) => {
       // Slow drift so particles keep moving even without mouse interaction.
-      particle.basePosition.x += particle.velocity.x * driftSpeed;
-      particle.basePosition.y += particle.velocity.y * driftSpeed;
+      particle.basePosition.x += particle.velocity.x * driftSpeed * smoothDelta * 60;
+      particle.basePosition.y += particle.velocity.y * driftSpeed * smoothDelta * 60;
 
       if (particle.basePosition.x > boundsX || particle.basePosition.x < -boundsX) {
         particle.velocity.x *= -1;
@@ -115,7 +118,7 @@ function AntigravityInner({
       const targetY = particle.basePosition.y + waveY;
       const targetZ = particle.basePosition.z;
 
-      // Mouse repulsion
+      // Mouse repulsion (disabled on touch devices for performance)
       const dx = particle.position.x - mouse3D.current.x;
       const dy = particle.position.y - mouse3D.current.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
@@ -124,26 +127,25 @@ function AntigravityInner({
       let repelY = 0;
 
       if (dist < magnetRadius && dist > 0) {
-        const force = (1 - dist / magnetRadius) * 1.5;
+        const force = (1 - dist / magnetRadius) * 1;
         repelX = (dx / dist) * force;
         repelY = (dy / dist) * force;
       }
 
-      // Smooth interpolation
-      particle.position.x += ((targetX + repelX) - particle.position.x) * 0.03;
-      particle.position.y += ((targetY + repelY) - particle.position.y) * 0.03;
-      particle.position.z += (targetZ - particle.position.z) * 0.03;
+      // Smooth interpolation with delta time
+      particle.position.x += ((targetX + repelX) - particle.position.x) * lerpFactor;
+      particle.position.y += ((targetY + repelY) - particle.position.y) * lerpFactor;
+      particle.position.z += (targetZ - particle.position.z) * lerpFactor;
 
       // Update instance
       dummy.position.copy(particle.position);
 
-      // Scale based on distance to mouse
-      const scaleFactor = dist < magnetRadius ? 1 + (1 - dist / magnetRadius) * 0.3 : 1;
-      dummy.scale.setScalar(particleSize * scaleFactor);
+      // Scale (simplified - no hover effect for performance)
+      dummy.scale.setScalar(particleSize);
 
-      // Rotation
-      dummy.rotation.x = time + particle.phase;
-      dummy.rotation.y = time * 0.5 + particle.phase;
+      // Simplified rotation
+      dummy.rotation.x = time * 0.3 + particle.phase;
+      dummy.rotation.y = time * 0.2 + particle.phase;
 
       dummy.updateMatrix();
       meshRef.current!.setMatrixAt(i, dummy.matrix);
@@ -168,8 +170,8 @@ function AntigravityInner({
       </mesh>
 
       <instancedMesh ref={meshRef} args={[undefined, undefined, particleCount]}>
-        <sphereGeometry args={[1, 8, 8]} />
-        <meshBasicMaterial color={color} transparent opacity={0.8} />
+        <sphereGeometry args={[1, 6, 6]} />
+        <meshBasicMaterial color={color} transparent opacity={0.6} />
       </instancedMesh>
     </group>
   );
@@ -199,6 +201,9 @@ export default function Antigravity({
       className={className}
       camera={{ position: [0, 0, 50], fov: 35 }}
       style={{ background: "transparent" }}
+      dpr={[1, 1.5]}
+      performance={{ min: 0.5 }}
+      gl={{ antialias: false, powerPreference: "high-performance" }}
       onPointerMove={(e) => {
         // Propagate mouse events to the scene
         const canvas = e.target as HTMLCanvasElement;
