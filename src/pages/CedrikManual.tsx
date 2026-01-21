@@ -103,10 +103,6 @@ export default function CedrikManual() {
     return "pos-hidden";
   };
 
-  const replayHero = () => {
-    setHeroAnimKey((prev) => prev + 1);
-  };
-
   const replaySection = (label: string) => {
     switch (label) {
       case "Home":
