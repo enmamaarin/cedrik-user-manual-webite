@@ -23,6 +23,7 @@ import Antigravity from "@/components/ui/Antigravity";
 
 export default function CedrikManual() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const [activeVideo, setActiveVideo] = useState<{
     title: string;
     src: string;
@@ -39,7 +40,7 @@ export default function CedrikManual() {
       document.body.style.overflow = "";
     };
   }, [activeVideo]);
-  
+
   const videos = [
     {
       title: "Getting Started",
@@ -84,28 +85,60 @@ export default function CedrikManual() {
       {/* Top Right Navbar */}
       <nav
         aria-label="Section navigation"
-        className="fixed top-4 right-4 z-40 flex items-center gap-2 bg-black/40 border border-white/10 backdrop-blur-xl rounded-full px-3 py-2 shadow-[0_12px_30px_rgba(0,0,0,0.35)]"
+        className="fixed top-4 right-4 z-40"
       >
-        {[
-          { label: "Home", href: "#home" },
-          { label: "Overview", href: "#overview" },
-          { label: "Walkthrough", href: "#walkthrough" },
-          { label: "Performance Analysis", href: "#performance" },
-          { label: "Capabilities", href: "#capabilities" },
-        ].map((item) => (
-          <div key={item.label} className="group">
-            {item.href ? (
-              <a
-                href={item.href}
-                className="relative block px-3 py-1.5 text-[11px] uppercase tracking-[0.22em] text-white/80 rounded-full border border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-300/60 hover:text-white hover:bg-white/10"
-              >
-                <span className="relative z-10">{item.label}</span>
-              </a>
-            ) : null}
+        <div className="flex items-center gap-2 bg-black/40 border border-white/10 backdrop-blur-xl rounded-full px-3 py-2 shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+          <button
+            type="button"
+            className="md:hidden px-3 py-1.5 text-[11px] uppercase tracking-[0.22em] text-white/80 rounded-full border border-white/10 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-300/60"
+            aria-expanded={isNavOpen}
+            aria-controls="cedrik-nav-menu"
+            onClick={() => setIsNavOpen((prev) => !prev)}
+          >
+            Menu
+          </button>
+          <div className="hidden md:flex items-center gap-2">
+            {[
+              { label: "Home", href: "#home" },
+              { label: "Overview", href: "#overview" },
+              { label: "Walkthrough", href: "#walkthrough" },
+              { label: "Performance Analysis", href: "#performance" },
+              { label: "Capabilities", href: "#capabilities" },
+            ].map((item) => (
+              <div key={item.label} className="group">
+                <a
+                  href={item.href}
+                  className="relative block px-3 py-1.5 text-[11px] uppercase tracking-[0.22em] text-white/80 rounded-full border border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-300/60 hover:text-white hover:bg-white/10"
+                >
+                  <span className="relative z-10">{item.label}</span>
+                </a>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+        <div
+          id="cedrik-nav-menu"
+          className={`md:hidden mt-2 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-xl shadow-[0_18px_40px_rgba(0,0,0,0.4)] overflow-hidden ${isNavOpen ? "block" : "hidden"}`}
+        >
+          {[
+            { label: "Home", href: "#home" },
+            { label: "Overview", href: "#overview" },
+            { label: "Walkthrough", href: "#walkthrough" },
+            { label: "Performance Analysis", href: "#performance" },
+            { label: "Capabilities", href: "#capabilities" },
+          ].map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="block px-4 py-3 text-xs uppercase tracking-[0.22em] text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+              onClick={() => setIsNavOpen(false)}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
       </nav>
-      
+
       {/* Hero / Intro */}
       <section className="max-w-screen-2xl mx-auto mt-6 px-4 sm:px-8 lg:px-12 grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center relative">
         {/* Antigravity Background */}
@@ -138,16 +171,25 @@ export default function CedrikManual() {
             <h1 className="text-3xl sm:text-4xl lg:text-[3.25rem] font-semibold text-white leading-[1.3] sm:leading-[1.28] lg:leading-[1.22] text-center lg:text-left">
               Cybersecurity Education through Responsive Integrated Knowledge
             </h1>
-            <p className="text-purple-100/80 text-lg max-w-xl">
-              A structured, human-friendly guide to Cedrik's learning paths,
-              defensive workflows, and hands-on exercises for teams and students.
+            <p className="text-purple-100/80 text-lg max-w-xl text-justify">
+              An AI-powered learning experience that transforms cybersecurity education through guided pathways, real-world defense workflows, and hands-on lab environments.
             </p>
           </div>
           <div className="flex flex-wrap gap-4">
-            <Button className="bg-purple-600/90 hover:bg-purple-600 text-purple-50 font-semibold px-6">
+            <Button
+              className="bg-purple-600/90 hover:bg-purple-600 text-purple-50 font-semibold px-6"
+              onClick={() => {
+                window.location.href = "https://139.162.47.27/";
+              }}
+            >
               Try CEDRIK Now
             </Button>
-            <Button className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-6">
+            <Button
+              className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-6"
+              onClick={() => {
+                document.getElementById("walkthrough")?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
               View Walkthrough
             </Button>
           </div>
@@ -164,15 +206,13 @@ export default function CedrikManual() {
                 Overview
               </span>
             </div>
-            <p className="text-purple-100/75 leading-relaxed">
-              Cedrik is a cybersecurity-focused AI system designed to assist
-              developers, analysts, and IT teams with secure coding practices,
-              vulnerability analysis, and defensive strategies.
+            <p className="text-purple-100/75 leading-relaxed text-justify">
+              CEDRIK: Cybersecurity Education through Responsive Integrated Knowledge is a capstone project designed to address the gaps in traditional cybersecurity education. The project proposes the development of a prototype platform that integrates Artificial Intelligence (AI) and sandbox-based learning environments for more adaptive, practical, and secure cybersecurity education.
             </p>
             <div className="h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent" />
             <p className="text-slate-200/70 text-sm">
               This manual provides a structured walkthrough of Cedrik's core features,
-              practical scenarios, and onboarding guidance.
+              scenarios, and setup guide.
             </p>
           </CardContent>
         </Card>
@@ -202,11 +242,11 @@ export default function CedrikManual() {
           <div className="relative">
             {/* Carousel Container */}
             <div className="carousel-3d">
-            {videos.map((item, i) => (
-              <Card
-                key={i}
-                className={`carousel-card ${getSlidePosition(i)} bg-white/5 backdrop-blur-xl border-white/10 hover:border-purple-400/50 transition-all duration-300 group overflow-hidden`}
-              >
+              {videos.map((item, i) => (
+                <Card
+                  key={i}
+                  className={`carousel-card ${getSlidePosition(i)} bg-white/5 backdrop-blur-xl border-white/10 hover:border-purple-400/50 transition-all duration-300 group overflow-hidden`}
+                >
                   <CardContent className="p-8 space-y-6">
                     <div className="aspect-video bg-gradient-to-br from-purple-600/20 to-purple-800/20 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300 relative overflow-hidden">
                       {item.thumbnail && (
@@ -256,11 +296,10 @@ export default function CedrikManual() {
                 <button
                   key={i}
                   onClick={() => setCurrentSlide(i)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    i === currentSlide 
-                      ? "bg-gradient-to-r from-purple-300 to-purple-400 w-8" 
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${i === currentSlide
+                      ? "bg-gradient-to-r from-purple-300 to-purple-400 w-8"
                       : "bg-white/30 hover:bg-white/50"
-                  }`}
+                    }`}
                 />
               ))}
             </div>

@@ -155,6 +155,12 @@
             overflow: hidden;
         }
 
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -295,6 +301,19 @@
             .response-meta {
                 letter-spacing: 0.1em;
             }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .page {
+                padding: 36px 14px 56px;
+            }
+
+            th,
+            td {
+                padding: 12px;
+            }
         }
     </style>
 </head>
@@ -336,89 +355,91 @@
             <section>
                 <h2>Performance Summary</h2>
                 <div class="panel">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Question</th>
-                                <th>Truthfulness</th>
-                                <th>Response Time</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>What is the capital of France?</td>
-                                <td><span class="badge badge-success">100%</span></td>
-                                <td>5.06s</td>
-                                <td>Excellent</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Who was the first President of the United States?</td>
-                                <td><span class="badge badge-success">95%</span></td>
-                                <td>5.68s</td>
-                                <td>Excellent</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>What is the chemical symbol for gold?</td>
-                                <td><span class="badge badge-success">100%</span></td>
-                                <td>4.61s</td>
-                                <td>Excellent</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>What is the largest planet in our solar system?</td>
-                                <td><span class="badge badge-success">100%</span></td>
-                                <td>4.71s</td>
-                                <td>Excellent</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>What is the smallest country in the world by area?</td>
-                                <td><span class="badge badge-success">90%</span></td>
-                                <td>4.44s</td>
-                                <td>Good</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>What year did World War II end?</td>
-                                <td><span class="badge badge-success">95%</span></td>
-                                <td>3.82s</td>
-                                <td>Excellent</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>What is the freezing point of water in Celsius?</td>
-                                <td><span class="badge badge-success">100%</span></td>
-                                <td>5.15s</td>
-                                <td>Excellent</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>How many bones are in an adult human body?</td>
-                                <td><span class="badge badge-warning">30%</span></td>
-                                <td>5.94s</td>
-                                <td>Vague</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>What is the speed of light?</td>
-                                <td><span class="badge badge-warning">30%</span></td>
-                                <td>4.91s</td>
-                                <td>Vague</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Who invented the telephone?</td>
-                                <td><span class="badge badge-success">95%</span></td>
-                                <td>5.43s</td>
-                                <td>Excellent</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Question</th>
+                                    <th>Truthfulness</th>
+                                    <th>Response Time</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>What is the capital of France?</td>
+                                    <td><span class="badge badge-success">100%</span></td>
+                                    <td>5.06s</td>
+                                    <td>Excellent</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Who was the first President of the United States?</td>
+                                    <td><span class="badge badge-success">95%</span></td>
+                                    <td>5.68s</td>
+                                    <td>Excellent</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>What is the chemical symbol for gold?</td>
+                                    <td><span class="badge badge-success">100%</span></td>
+                                    <td>4.61s</td>
+                                    <td>Excellent</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>What is the largest planet in our solar system?</td>
+                                    <td><span class="badge badge-success">100%</span></td>
+                                    <td>4.71s</td>
+                                    <td>Excellent</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>What is the smallest country in the world by area?</td>
+                                    <td><span class="badge badge-success">90%</span></td>
+                                    <td>4.44s</td>
+                                    <td>Good</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>What year did World War II end?</td>
+                                    <td><span class="badge badge-success">95%</span></td>
+                                    <td>3.82s</td>
+                                    <td>Excellent</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>What is the freezing point of water in Celsius?</td>
+                                    <td><span class="badge badge-success">100%</span></td>
+                                    <td>5.15s</td>
+                                    <td>Excellent</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>How many bones are in an adult human body?</td>
+                                    <td><span class="badge badge-warning">30%</span></td>
+                                    <td>5.94s</td>
+                                    <td>Vague</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>What is the speed of light?</td>
+                                    <td><span class="badge badge-warning">30%</span></td>
+                                    <td>4.91s</td>
+                                    <td>Vague</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Who invented the telephone?</td>
+                                    <td><span class="badge badge-success">95%</span></td>
+                                    <td>5.43s</td>
+                                    <td>Excellent</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
