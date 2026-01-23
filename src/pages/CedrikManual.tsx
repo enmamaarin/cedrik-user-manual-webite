@@ -393,6 +393,7 @@ export default function CedrikManual() {
               desc: "A quick demo highlighting account setup, smart chats, customizable AI responses, and personalized controls all in one seamless flow.",
               src: aiInActionVideo,
               thumbnail: aiInActionThumb,
+              youtubeUrl: "https://youtu.be/4FDtlV5RLr4?si=i610R9jZQCO8v_UQ",
               details:
                 "This video demonstrates the complete user journey within the AI system, starting with account creation and secure login to confirm that onboarding and authentication work properly. It then showcases default chat functionality by creating multiple new chats, asking basic identity questions, and highlighting clear separation between conversations. Chat management features are demonstrated through editing and renaming chats for better organization. The video then introduces advanced AI customization by switching response styles, comparing Professor Cedrik's WHY-focused explanations with Hackerman Pancho's HOW-focused and ethical responses within dedicated chat sessions. User control is further shown through chat deletion, followed by UI personalization via Dark Mode to enhance accessibility and comfort. Finally, the walkthrough concludes with support access and a logout-login sequence to confirm that changes and settings persist across sessions.",
             },
@@ -401,6 +402,7 @@ export default function CedrikManual() {
               desc: "A step-by-step walkthrough showing how users can safely reset their password, regain access to their account, and continue using CEDRIK AI.",
               src: secureAccessRecoveryVideo,
               thumbnail: secureAccessThumb,
+              youtubeUrl: "https://youtu.be/TAfNYGgzXy8?si=Vz_fXt5MgIElia7C",
               details:
                 "This video demonstrates how users access the Settings menu to update their username and change their password, highlighting account customization options and best practices for maintaining security within the system.",
             },
@@ -409,6 +411,7 @@ export default function CedrikManual() {
               desc: "A hands-on security exercise demonstrating common web vulnerabilities, SQL Injection and XSS using DVWA, highlighting real attack techniques, proper mitigations, and effective detection strategies.",
               src: webAppSecurityDvwaVideo,
               thumbnail: dvwaThumb,
+              youtubeUrl: "https://youtu.be/HC5JGgYqjsU?si=Lqtc0QGUOU7As_FQ",
               details:
                 "This video demonstrates hands-on web application security testing using DVWA, focusing on common vulnerabilities such as SQL Injection and Cross-Site Scripting (XSS). In the first challenge, the application is accessed using default credentials, the database is reset, and the security level is set to low. SQL injection techniques are then used to bypass authentication and extract all user records from the database. This section highlights how improper input handling can lead to severe data exposure and emphasizes mitigation strategies such as prepared statements, input validation and sanitization, least-privilege database access, and continuous monitoring through logs, IDS, WAF, and SIEM solutions.\n\nThe second challenge expands on SQL Injection by demonstrating error-based and UNION-based attacks. Single-quote inputs are used to trigger database errors, authentication is bypassed using logical conditions, database structure is identified through ORDER BY clauses, and sensitive credentials are extracted using UNION SELECT queries. The video explains how these attacks exploit weak query handling and stresses the importance of secure development practices, including parameterized queries, strict input whitelisting, stored procedures, proper escaping of special characters, and proactive monitoring for suspicious query patterns and database anomalies.\n\nThe third challenge focuses on Cross-Site Scripting (XSS) vulnerabilities, showcasing reflected and stored XSS attacks using script tags and event handlers to execute malicious code and access sensitive information such as session cookies. It demonstrates how injected scripts can affect individual users or all visitors when stored XSS is present. The section concludes with recommended defenses, including input sanitization and output encoding, implementation of strict Content Security Policy headers, secure cookie attributes, and comprehensive monitoring using WAF rules, IDS alerts, CSP violation reports, and log analysis to detect and respond to XSS attempts.",
             },
@@ -417,6 +420,7 @@ export default function CedrikManual() {
               desc: "A focused security exercise demonstrating how WordPress usernames can be enumerated using scanning tools, REST API endpoints, and author-based URLs, along with key mitigation and monitoring techniques.",
               src: wordpressSecurityTestingVideo,
               thumbnail: wordpressThumb,
+              youtubeUrl: "https://youtu.be/GsH-Z5YIOJk?si=y9E2YtYvtUHgRprd",
               details:
                 "This video demonstrates a practical WordPress security assessment focused on user enumeration, showing how attackers can identify valid usernames through automated scanning tools, exposed application interfaces, and publicly accessible author information. It explains how these weaknesses can be mitigated by restricting user information exposure, disabling unnecessary endpoints, hiding usernames with security plugins, and using unique administrator accounts that are not publicly identifiable. The walkthrough also highlights detection and monitoring practices, including reviewing server logs for repeated enumeration attempts, configuring firewall rules to detect scanning behavior, and blocking suspicious sources that repeatedly probe for user information.",
             },
@@ -486,6 +490,10 @@ export default function CedrikManual() {
                 <Button
                   className="w-full mt-auto bg-white/10 hover:bg-white/20 border border-white/10 text-white"
                   onClick={() => {
+                    if (item.youtubeUrl) {
+                      window.open(item.youtubeUrl, "_blank", "noopener,noreferrer");
+                      return;
+                    }
                     if (item.src) {
                       setActiveVideo({
                         title: item.title,
