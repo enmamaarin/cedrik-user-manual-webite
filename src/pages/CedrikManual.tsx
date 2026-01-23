@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { PlayCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { PlayCircle, ChevronLeft, ChevronRight, Youtube } from "lucide-react";
 import cedrikLogo from "@/assets/cedrik-logo.png";
+import auspiciaLogo from "@/assets/Auspicia.png.jpg";
 import performanceImage from "@/assets/Performance.png";
 import gettingStartedThumb from "@/assets/Thumbnail GS.png";
 import adminDashboardThumb from "@/assets/Thumbnail Admin.png";
 import discoverCedrikThumb from "@/assets/Thumbnail Cedrik.png";
-import aiInActionThumb from "@/assets/AIA.png";
-import secureAccessThumb from "@/assets/PassReset.png";
-import dvwaThumb from "@/assets/DVWA.png";
-import wordpressThumb from "@/assets/WPST.png";
-import networkPenetrationThumb from "@/assets/NPT.png";
-import owaspWebGoatThumb from "@/assets/OWG.png";
-import owaspJuiceThumb from "@/assets/OWJ.png";
-import superAdminThumb from "@/assets/SuperAd.png";
 import Antigravity from "@/components/ui/Antigravity";
 import SplitText from "@/components/ui/SplitText";
 
@@ -24,7 +17,6 @@ export default function CedrikManual() {
   const [isDesktop, setIsDesktop] = useState(false);
   const [heroAnimKey, setHeroAnimKey] = useState(0);
   const [overviewAnimKey, setOverviewAnimKey] = useState(0);
-  const [walkthroughAnimKey, setWalkthroughAnimKey] = useState(0);
   const [performanceAnimKey, setPerformanceAnimKey] = useState(0);
   const [capabilitiesAnimKey, setCapabilitiesAnimKey] = useState(0);
 
@@ -83,8 +75,8 @@ export default function CedrikManual() {
       case "Overview":
         setOverviewAnimKey((prev) => prev + 1);
         break;
-      case "Walkthrough":
-        setWalkthroughAnimKey((prev) => prev + 1);
+      case "CEDRIK Walkthrough":
+        setOverviewAnimKey((prev) => prev + 1);
         break;
       case "Performance Analysis":
         setPerformanceAnimKey((prev) => prev + 1);
@@ -135,8 +127,7 @@ export default function CedrikManual() {
           <div className="hidden md:flex items-center gap-2">
             {[
               { label: "Home", href: "#home" },
-              { label: "Overview", href: "#overview" },
-              { label: "Walkthrough", href: "#walkthrough" },
+              { label: "CEDRIK Walkthrough", href: "#overview" },
               { label: "Performance Analysis", href: "#performance" },
               { label: "Capabilities", href: "#capabilities" },
             ].map((item) => (
@@ -158,8 +149,7 @@ export default function CedrikManual() {
         >
           {[
             { label: "Home", href: "#home" },
-            { label: "Overview", href: "#overview" },
-            { label: "Walkthrough", href: "#walkthrough" },
+            { label: "CEDRIK Walkthrough", href: "#overview" },
             { label: "Performance Analysis", href: "#performance" },
             { label: "Capabilities", href: "#capabilities" },
           ].map((item) => (
@@ -218,7 +208,7 @@ export default function CedrikManual() {
             <Button
               className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-6"
               onClick={() => {
-                document.getElementById("walkthrough")?.scrollIntoView({ behavior: "smooth" });
+                document.getElementById("overview")?.scrollIntoView({ behavior: "smooth" });
               }}
             >
               View Walkthrough
@@ -254,19 +244,19 @@ export default function CedrikManual() {
       <section id="overview" className="max-w-5xl mx-auto mt-16 relative pb-28 scroll-mt-24 z-10">
         <h2 className="text-5xl sm:text-6xl font-black tracking-tight text-center mb-12">
           {overviewAnimKey > 0 ? (
-            <SplitText key={overviewAnimKey} text="Take a Quick Look" />
+            <SplitText key={overviewAnimKey} text="CEDRIK Walkthrough" />
           ) : (
-            "Take a Quick Look"
+            "CEDRIK Walkthrough"
           )}
         </h2>
           <p className="text-purple-100/70 text-center max-w-2xl mx-auto -mt-6 mb-10">
             {overviewAnimKey > 0 ? (
               <SplitText
                 key={overviewAnimKey + 1}
-                text="Quick previews of key features, workflows, and dashboards you can explore in minutes."
+                text="Walkthroughs highlighting key flows and hands-on guidance across the platform."
               />
             ) : (
-              "Quick previews of key features, workflows, and dashboards you can explore in minutes."
+              "Walkthroughs highlighting key flows and hands-on guidance across the platform."
             )}
           </p>
 
@@ -338,145 +328,66 @@ export default function CedrikManual() {
               ))}
             </div>
           </div>
-      </section>
 
-      {/* CEDRIK Walkthrough */}
-      <section id="walkthrough" className="max-w-6xl mx-auto mt-48 pt-4 space-y-10 relative scroll-mt-24 z-10">
-        <div className="text-center space-y-4">
-          <h2 className="text-4xl sm:text-5xl font-bold">
-            {walkthroughAnimKey > 0 ? (
-              <SplitText key={walkthroughAnimKey} text="CEDRIK Walkthrough" />
-            ) : (
-              "CEDRIK Walkthrough"
-            )}
-          </h2>
-          <p className="text-purple-100/70 max-w-2xl mx-auto">
-            {walkthroughAnimKey > 0 ? (
-              <SplitText
-                key={walkthroughAnimKey + 1}
-                text="Walkthroughs highlighting key flows and hands-on guidance across the platform."
-              />
-            ) : (
-              "Walkthroughs highlighting key flows and hands-on guidance across the platform."
-            )}
-          </p>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
-          {[
-            {
-              title: "AI in Action",
-              desc: "A quick demo highlighting account setup, smart chats, customizable AI responses, and personalized controls all in one seamless flow.",
-              thumbnail: aiInActionThumb,
-              youtubeUrl: "https://youtu.be/nfE9Yp3pKjU",
-              details:
-                "This video demonstrates the complete user journey within the AI system, starting with account creation and secure login to confirm that onboarding and authentication work properly. It then showcases default chat functionality by creating multiple new chats, asking basic identity questions, and highlighting clear separation between conversations. Chat management features are demonstrated through editing and renaming chats for better organization. The video then introduces advanced AI customization by switching response styles, comparing Professor Cedrik's WHY-focused explanations with Hackerman Pancho's HOW-focused and ethical responses within dedicated chat sessions. User control is further shown through chat deletion, followed by UI personalization via Dark Mode to enhance accessibility and comfort. Finally, the walkthrough concludes with support access and a logout-login sequence to confirm that changes and settings persist across sessions.",
-            },
-            {
-              title: "Secure Access Recovery",
-              desc: "A step-by-step walkthrough showing how users can safely reset their password, regain access to their account, and continue using CEDRIK AI.",
-              thumbnail: secureAccessThumb,
-              youtubeUrl: "https://youtu.be/UO4gDX-_wV4",
-              details:
-                "This video demonstrates how users access the Settings menu to update their username and change their password, highlighting account customization options and best practices for maintaining security within the system.",
-            },
-            {
-              title: "Web Application Security (DVWA)",
-              desc: "A hands-on security exercise demonstrating common web vulnerabilities, SQL Injection and XSS using DVWA, highlighting real attack techniques, proper mitigations, and effective detection strategies.",
-              thumbnail: dvwaThumb,
-              youtubeUrl: "https://youtu.be/Weuio8JnHqA",
-              details:
-                "This video demonstrates hands-on web application security testing using DVWA, focusing on common vulnerabilities such as SQL Injection and Cross-Site Scripting (XSS). In the first challenge, the application is accessed using default credentials, the database is reset, and the security level is set to low. SQL injection techniques are then used to bypass authentication and extract all user records from the database. This section highlights how improper input handling can lead to severe data exposure and emphasizes mitigation strategies such as prepared statements, input validation and sanitization, least-privilege database access, and continuous monitoring through logs, IDS, WAF, and SIEM solutions.\n\nThe second challenge expands on SQL Injection by demonstrating error-based and UNION-based attacks. Single-quote inputs are used to trigger database errors, authentication is bypassed using logical conditions, database structure is identified through ORDER BY clauses, and sensitive credentials are extracted using UNION SELECT queries. The video explains how these attacks exploit weak query handling and stresses the importance of secure development practices, including parameterized queries, strict input whitelisting, stored procedures, proper escaping of special characters, and proactive monitoring for suspicious query patterns and database anomalies.\n\nThe third challenge focuses on Cross-Site Scripting (XSS) vulnerabilities, showcasing reflected and stored XSS attacks using script tags and event handlers to execute malicious code and access sensitive information such as session cookies. It demonstrates how injected scripts can affect individual users or all visitors when stored XSS is present. The section concludes with recommended defenses, including input sanitization and output encoding, implementation of strict Content Security Policy headers, secure cookie attributes, and comprehensive monitoring using WAF rules, IDS alerts, CSP violation reports, and log analysis to detect and respond to XSS attempts.",
-            },
-            {
-              title: "WordPress Security Testing",
-              desc: "A focused security exercise demonstrating how WordPress usernames can be enumerated using scanning tools, REST API endpoints, and author-based URLs, along with key mitigation and monitoring techniques.",
-              thumbnail: wordpressThumb,
-              youtubeUrl: "https://youtu.be/D-A9duh3XlA",
-              details:
-                "This video demonstrates a practical WordPress security assessment focused on user enumeration, showing how attackers can identify valid usernames through automated scanning tools, exposed application interfaces, and publicly accessible author information. It explains how these weaknesses can be mitigated by restricting user information exposure, disabling unnecessary endpoints, hiding usernames with security plugins, and using unique administrator accounts that are not publicly identifiable. The walkthrough also highlights detection and monitoring practices, including reviewing server logs for repeated enumeration attempts, configuring firewall rules to detect scanning behavior, and blocking suspicious sources that repeatedly probe for user information.",
-            },
-            {
-              title: "Network Penetration Test",
-              desc: "A hands-on network security assessment demonstrating how port scanning and service enumeration expose vulnerable services, followed by vulnerability research and recommended hardening measures.",
-              thumbnail: networkPenetrationThumb,
-              youtubeUrl: "https://youtu.be/4uoAxc4Jaek",
-              details:
-                "This video shows a network penetration testing exercise that demonstrates how exposed services and open ports can increase an organization's attack surface. The assessment begins with a basic network scan to identify reachable hosts, followed by service version detection to determine which applications are running and whether they are outdated or vulnerable. Multiple open ports are identified, and one exposed service is analyzed further to research known vulnerabilities, highlighting how attackers can move from reconnaissance to exploitation. The documentation emphasizes mitigation strategies such as closing unnecessary ports, disabling unused services, enforcing strict firewall rules, keeping systems patched, segmenting networks to protect critical assets, and replacing insecure protocols. It also highlights the importance of detection and monitoring through intrusion detection and prevention systems, firewall log analysis, alerts for scanning behavior, honeypots for reconnaissance detection, and traffic analysis to identify abnormal network activity.",
-            },
-            {
-              title: "OWASP WebGoat",
-              desc: "A practical web security exercise demonstrating how HTTP-based applications can expose sensitive data, using the WebGoat HTTP Basics lesson to analyze requests, responses, and common security weaknesses.",
-              thumbnail: owaspWebGoatThumb,
-              youtubeUrl: "https://youtu.be/kAF02zlMjBc",
-              details:
-                "This video shows a web security exercise using the HTTP Basics lesson in OWASP WebGoat to demonstrate how unsecured HTTP communication can expose sensitive information. The walkthrough shows form submission using a standard HTTP request, observation of the server's response through browser developer tools, and successful completion of the lesson by analyzing request methods and response data. It highlights how form data is transmitted in plaintext and how response headers and payloads can reveal sensitive details such as session information and application behavior. These emphasizes the importance of mitigating these risks by enforcing encrypted connections, validating and sanitizing user input, applying secure HTTP headers, and protecting forms against unauthorized requests. It also outlines the role of monitoring and detection, including logging form submissions, tracking abnormal request patterns, using web application firewalls to block suspicious activity, and generating alerts for repeated or automated access to sensitive endpoints.",
-            },
-            {
-              title: "OWASP Juice",
-              desc: "A hands-on web application security exercise demonstrating real-world attack scenarios in OWASP Juice Shop, covering authentication bypass, data extraction, and cross-site scripting vulnerabilities.",
-              thumbnail: owaspJuiceThumb,
-              youtubeUrl: "https://youtu.be/l-gtaiTUUCM",
-              details:
-                "This video shows a hands-on web application security assessment using OWASP Juice Shop to demonstrate common real-world vulnerabilities, including authentication bypass, data extraction, and cross-site scripting attacks. The walkthrough shows how weak input handling can allow attackers to bypass login controls, access sensitive user information, and inject malicious scripts that execute in user browsers or persist within the application. It explains the security impact of these vulnerabilities and emphasizes proper mitigation techniques such as using parameterized queries, enforcing strict input validation and output encoding, applying Content Security Policy headers, sanitizing data before storage, and securing authentication mechanisms and cookies. The documentation also highlights the importance of detection and monitoring through application logs, web application firewall rules, database activity monitoring, and centralized alerting to identify SQL injection and XSS patterns, failed login attempts, and suspicious script activity.",
-            },
-            {
-              title: "Admin Management",
-              desc: "A guided walkthrough showing how administrators create new users, manage and edit user accounts, and assign admin roles highlighting full control and efficient system management.",
-              thumbnail: adminDashboardThumb,
-              youtubeUrl: "https://youtu.be/ZnI-ODy97L0",
-              details:
-                "This video demonstrates the administrative capabilities for managing system users, including creating new user and administrator accounts and editing existing accounts as needed. It highlights how administrators can assign roles, update user information, and manage access levels to ensure proper authorization and control within the system. The walkthrough emphasizes the importance of role-based access management, accurate user administration, and maintaining system integrity by ensuring that only authorized individuals are granted administrative privileges.",
-            },
-            {
-              title: "Super Admin Control",
-              desc: "A powerful overview highlighting advanced super admin capabilities from full user and admin management to report generation, memory creation, and system archiving for total platform control.",
-              thumbnail: superAdminThumb,
-              youtubeUrl: "https://youtu.be/67k8jyzyDDA",
-              details:
-                "This video demonstrates the extended capabilities of the Super Admin role, which includes all standard administrative functions along with advanced system-level controls. In addition to creating and managing user and administrator accounts, the Super Admin can view detailed user grade records within the CEDRIK Labs environment, manage and archive system memory, review comprehensive audit logs, and create or assign additional Super Admin accounts. This walkthrough highlights the highest level of access within the platform, emphasizing oversight, accountability, and governance through detailed monitoring, record management, and controlled delegation of super administrative privileges.",
-            }
-          ].map((item, i) => (
-            <Card
-              key={i}
-              className="bg-white/5 backdrop-blur-xl border-white/10 hover:border-purple-400/50 transition-all duration-300 overflow-hidden group h-full flex flex-col"
-            >
-              <div className="relative aspect-video">
-                {item.thumbnail && (
-                  <img
-                    src={item.thumbnail}
-                    alt={`${item.title} preview`}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-purple-500/10 to-purple-800/20" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(106,13,173,0.25),transparent_55%)]" />
-                <div className="absolute inset-0 bg-black/35 group-hover:bg-black/20 transition-colors duration-300" />
-                <button
-                  type="button"
-                  className="absolute inset-0 m-auto w-14 h-14 text-white/90 drop-shadow-lg"
-                  onClick={() => {
-                    if (item.youtubeUrl) {
-                      window.open(item.youtubeUrl, "_blank", "noopener,noreferrer");
-                    }
-                  }}
-                  aria-label={`Play ${item.title} on YouTube`}
-                >
-                  <PlayCircle className="w-14 h-14 text-white/90 drop-shadow-lg transition-transform duration-200 group-hover:scale-105" />
-                </button>
-              </div>
-              <CardContent className="p-6 space-y-3 flex flex-col flex-1">
-                <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-                <p className="text-sm text-slate-400 text-justify flex-1">
-                  {item.desc}
-                </p>
+          <Card className="mt-40 sm:mt-44 md:mt-56 lg:mt-72 bg-white/5 backdrop-blur-xl border-white/10 overflow-hidden">
+            <div className="relative">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(106,13,173,0.4),transparent_60%),radial-gradient(circle_at_85%_55%,rgba(160,90,255,0.22),transparent_55%)]" />
+              <div className="absolute -right-28 -top-28 h-72 w-72 rounded-full bg-purple-500/25 blur-3xl" />
+              <div className="absolute -left-32 -bottom-10 h-60 w-60 rounded-full bg-fuchsia-400/20 blur-3xl" />
+              <CardContent className="relative p-8 sm:p-10 lg:p-14">
+                <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] items-center">
+                  <div className="space-y-5 text-center sm:text-left">
+                    <p className="text-xs uppercase tracking-[0.35em] text-purple-200/70">
+                      Full Walkthrough
+                    </p>
+                    <div className="flex items-center justify-center sm:justify-start gap-3">
+                      <img
+                        src={auspiciaLogo}
+                        alt="Auspicia Systems logo"
+                        className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 p-1.5"
+                      />
+                      <div className="text-sm uppercase tracking-[0.3em] text-purple-100/70">
+                        Auspicia Systems
+                      </div>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-white">
+                      Deep dive into every CEDRIK workflow
+                    </h3>
+                    <p className="text-purple-100/75 text-sm sm:text-base leading-relaxed">
+                      Explore the complete playlist from Auspicia with guided sessions that
+                      cover onboarding, labs, admin controls, and security demonstrations.
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center sm:items-start lg:items-end gap-6">
+                    <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3">
+                      <Youtube className="h-4 w-4 text-red-400" />
+                      <span className="text-[10px] uppercase tracking-[0.32em] text-purple-200/70">
+                        YouTube
+                      </span>
+                      <span className="h-5 w-px bg-white/15" />
+                      <span className="text-sm font-semibold text-white">Auspicia</span>
+                    </div>
+                    <Button
+                      className="w-full sm:w-auto bg-gradient-to-r from-purple-500 via-purple-600 to-purple-800 hover:from-purple-600 hover:via-purple-700 hover:to-purple-900 border-0 font-semibold px-6 py-6 h-auto rounded-full shadow-[0_16px_40px_rgba(128,68,255,0.35)]"
+                      onClick={() => {
+                        window.open(
+                          "https://www.youtube.com/watch?v=nfE9Yp3pKjU&list=PLsCu_u6claXhjQiILIjykiCQrv1RV-hpR&index=1",
+                          "_blank",
+                          "noopener,noreferrer"
+                        );
+                      }}
+                    >
+                      Watch the Full Walkthrough
+                    </Button>
+                  </div>
+                </div>
               </CardContent>
-            </Card>
-          ))}
-        </div>
+            </div>
+          </Card>
       </section>
 
       {/* Performance Analysis */}
-      <section id="performance" className="max-w-5xl mx-auto mt-28 space-y-8 relative scroll-mt-24 z-10">
+      <section id="performance" className="max-w-5xl mx-auto mt-12 space-y-8 relative scroll-mt-24 z-10">
         <div className="text-center space-y-4">
           <h2 className="text-4xl sm:text-5xl font-bold">
             {performanceAnimKey > 0 ? (
