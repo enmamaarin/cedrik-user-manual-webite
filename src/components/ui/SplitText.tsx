@@ -12,8 +12,8 @@ export default function SplitText({
   text,
   className,
   delay = 0,
-  stagger = 0.2,
-  duration = 1.25,
+  stagger = 0.35,
+  duration = 1.8,
 }: SplitTextProps) {
   const words = text.split(" ");
 
