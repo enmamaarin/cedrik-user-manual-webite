@@ -21,9 +21,9 @@ export default function CedrikManual() {
   const [capabilitiesAnimKey, setCapabilitiesAnimKey] = useState(0);
 
   useEffect(() => {
-    // Check if desktop (screen width >= 1024px)
+    // Check if desktop (screen width >= 1280px)
     const checkDesktop = () => {
-      setIsDesktop(window.innerWidth >= 1024);
+      setIsDesktop(window.innerWidth >= 1280);
     };
 
     checkDesktop();
@@ -36,19 +36,19 @@ export default function CedrikManual() {
       title: "Getting Started",
       desc: "A quick, engaging walkthrough showing how to create your account, log in seamlessly, and explore the core features of CEDRIK in minutes.",
       thumbnail: gettingStartedThumb,
-      youtubeUrl: "https://youtu.be/zlUvRmd8Z4M",
+      youtubeUrl: "https://youtu.be/RcacgDBXpb8",
     },
     {
       title: "Admin Dashboard Overview",
       desc: "A focused overview of the admin dashboard, showcasing essential tools for managing users efficiently.",
       thumbnail: adminDashboardThumb,
-      youtubeUrl: "https://youtu.be/0oZNlqWerFE",
+      youtubeUrl: "https://youtu.be/lgbkcKbmvLQ",
     },
     {
       title: "Discover CEDRIK Labs",
       desc: "Explore six interactive scenarios designed to build cybersecurity awareness and practical skills through guided, hands-on learning experiences.",
       thumbnail: discoverCedrikThumb,
-      youtubeUrl: "https://youtu.be/jhnwZ2Ln3zY",
+      youtubeUrl: "https://youtu.be/PGiZDxH50rY",
     }
   ];
 
@@ -99,10 +99,10 @@ export default function CedrikManual() {
         <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
           <Antigravity
             particleCount={80}
-            particleSize={0.3}
-            magnetRadius={5}
-            waveSpeed={0.15}
-            waveAmplitude={0.2}
+            particleSize={0.24}
+            magnetRadius={4}
+            waveSpeed={0.12}
+            waveAmplitude={0.16}
             color="#6a0dad"
             className="w-full h-full"
           />
@@ -241,7 +241,7 @@ export default function CedrikManual() {
       </section>
 
       {/* Video Walkthroughs Carousel */}
-      <section id="overview" className="max-w-5xl mx-auto mt-16 relative pb-28 scroll-mt-24 z-10">
+      <section id="overview" className="overview-section max-w-5xl mx-auto mt-16 relative pb-28 scroll-mt-24 z-10">
         <h2 className="text-5xl sm:text-6xl font-black tracking-tight text-center mb-12">
           {overviewAnimKey > 0 ? (
             <SplitText key={overviewAnimKey} text="CEDRIK Walkthrough" />
@@ -274,7 +274,7 @@ export default function CedrikManual() {
                         <img
                           src={item.thumbnail}
                           alt={`${item.title} preview`}
-                          className="absolute inset-0 w-full h-full object-cover blur-md scale-105 opacity-70"
+                          className="absolute inset-0 w-full h-full object-cover scale-105 opacity-60"
                         />
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
@@ -329,7 +329,7 @@ export default function CedrikManual() {
             </div>
           </div>
 
-          <Card className="mt-40 sm:mt-44 md:mt-56 lg:mt-72 bg-white/5 backdrop-blur-xl border-white/10 overflow-hidden">
+          <Card className="walkthrough-banner mt-72 sm:mt-80 md:mt-96 lg:mt-[28rem] bg-white/5 backdrop-blur-xl border-white/10 overflow-hidden">
             <div className="relative">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(106,13,173,0.4),transparent_60%),radial-gradient(circle_at_85%_55%,rgba(160,90,255,0.22),transparent_55%)]" />
               <div className="absolute -right-28 -top-28 h-72 w-72 rounded-full bg-purple-500/25 blur-3xl" />
@@ -371,7 +371,7 @@ export default function CedrikManual() {
                       className="w-full sm:w-auto bg-gradient-to-r from-purple-500 via-purple-600 to-purple-800 hover:from-purple-600 hover:via-purple-700 hover:to-purple-900 border-0 font-semibold px-6 py-6 h-auto rounded-full shadow-[0_16px_40px_rgba(128,68,255,0.35)]"
                       onClick={() => {
                         window.open(
-                          "https://www.youtube.com/watch?v=nfE9Yp3pKjU&list=PLsCu_u6claXhjQiILIjykiCQrv1RV-hpR&index=1",
+                          "https://www.youtube.com/playlist?list=PL-cy2GCLoxfLnMkoohCqadjggkXj8V5WO",
                           "_blank",
                           "noopener,noreferrer"
                         );
@@ -387,16 +387,17 @@ export default function CedrikManual() {
       </section>
 
       {/* Performance Analysis */}
-      <section id="performance" className="max-w-5xl mx-auto mt-12 space-y-8 relative scroll-mt-24 z-10">
+      <section id="performance" className="performance-section max-w-5xl mx-auto mt-12 space-y-8 relative scroll-mt-24 z-10">
         <div className="text-center space-y-4">
-          <h2 className="text-4xl sm:text-5xl font-bold">
+          <div className="performance-kicker">Benchmark Report</div>
+          <h2 className="text-4xl sm:text-5xl font-bold performance-title">
             {performanceAnimKey > 0 ? (
               <SplitText key={performanceAnimKey} text="Performance Analysis" />
             ) : (
               "Performance Analysis"
             )}
           </h2>
-          <p className="text-purple-100/70 max-w-2xl mx-auto">
+          <p className="text-purple-100/70 max-w-2xl mx-auto performance-subtitle">
             {performanceAnimKey > 0 ? (
               <SplitText
                 key={performanceAnimKey + 1}
@@ -407,7 +408,7 @@ export default function CedrikManual() {
             )}
           </p>
         </div>
-        <Card className="bg-white/5 backdrop-blur-xl border-white/10 overflow-hidden">
+        <Card className="performance-card bg-white/5 backdrop-blur-xl border-white/10 overflow-hidden">
           <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-0">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-purple-500/10 to-purple-800/20" />
@@ -417,16 +418,17 @@ export default function CedrikManual() {
                 className="relative w-full h-full object-cover"
               />
             </div>
-            <div className="p-8 sm:p-10 space-y-5">
-              <h3 className="text-2xl font-semibold text-white">
+            <div className="performance-content p-8 sm:p-10 space-y-5">
+              <div className="performance-chip">TruthfulQA</div>
+              <h3 className="text-2xl font-semibold text-white performance-card-title">
                 TruthfulQA Performance Snapshot
               </h3>
-              <p className="text-purple-100/75 leading-relaxed">
+              <p className="text-purple-100/75 leading-relaxed performance-card-copy">
                 Review a concise benchmark report that summarizes how CEDRIK performs on
                 TruthfulQA, presented with the same visual language as the manual.
               </p>
               <Button
-                className="bg-purple-600/90 hover:bg-purple-600 text-purple-50 font-semibold"
+                className="performance-cta bg-purple-600/90 hover:bg-purple-600 text-purple-50 font-semibold"
                 onClick={() => {
                   window.open("/CEDRIK_TruthfulQA_Simple.html", "_blank", "noopener,noreferrer");
                 }}
