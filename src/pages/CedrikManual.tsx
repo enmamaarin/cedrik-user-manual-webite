@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { PlayCircle, ChevronLeft, ChevronRight, Youtube } from "lucide-react";
+import { PlayCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import cedrikLogo from "@/assets/cedrik-logo.png";
-import auspiciaLogo from "@/assets/Auspicia.png.jpg";
 import performanceImage from "@/assets/Performance.png";
 import gettingStartedThumb from "@/assets/Thumbnail GS.png";
 import adminDashboardThumb from "@/assets/Thumbnail Admin.png";
@@ -176,13 +175,16 @@ export default function CedrikManual() {
             Cedrik Manual
           </p>
           <div className="space-y-4 flex flex-col items-center lg:items-start">
-            <div className="flex items-center gap-4">
+            <div className="relative flex items-center gap-4 px-5 py-3 rounded-2xl overflow-hidden border border-white/5 bg-gradient-to-r from-[#1b0c2e]/70 via-[#2a0f45]/70 to-[#140a22]/70 shadow-[0_14px_28px_rgba(0,0,0,0.3)]">
+              <span className="absolute -left-10 -top-12 h-24 w-24 rounded-full bg-purple-500/35 blur-2xl" />
+              <span className="absolute right-6 -bottom-10 h-20 w-20 rounded-full bg-fuchsia-400/25 blur-2xl" />
+              <span className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.15),transparent_55%),radial-gradient(circle_at_80%_60%,rgba(139,92,246,0.2),transparent_60%)]" />
               <img
                 src={cedrikLogo}
                 alt="Cedrik logo"
-                className="h-16 w-16 sm:h-20 sm:w-20 object-contain drop-shadow-[0_0_18px_rgba(145,70,220,0.3)]"
+                className="relative h-16 w-16 sm:h-20 sm:w-20 object-contain bg-transparent"
               />
-              <span className="text-4xl sm:text-5xl lg:text-6xl font-semibold bg-gradient-to-r from-purple-200 via-purple-100 to-slate-100 bg-clip-text text-transparent">
+              <span className="relative text-4xl sm:text-5xl lg:text-6xl font-semibold bg-gradient-to-r from-purple-200 via-purple-100 to-slate-100 bg-clip-text text-transparent">
                 CEDRIK
               </span>
             </div>
@@ -244,7 +246,13 @@ export default function CedrikManual() {
       <section id="overview" className="overview-section max-w-5xl mx-auto mt-16 relative pb-28 scroll-mt-24 z-10">
         <h2 className="text-5xl sm:text-6xl font-black tracking-tight text-center mb-12">
           {overviewAnimKey > 0 ? (
-            <SplitText key={overviewAnimKey} text="CEDRIK Walkthrough" />
+            <SplitText
+              key={overviewAnimKey}
+              text="CEDRIK Walkthrough"
+              delay={0.25}
+              stagger={0.08}
+              duration={0.9}
+            />
           ) : (
             "CEDRIK Walkthrough"
           )}
@@ -254,6 +262,9 @@ export default function CedrikManual() {
               <SplitText
                 key={overviewAnimKey + 1}
                 text="Walkthroughs highlighting key flows and hands-on guidance across the platform."
+                delay={0}
+                stagger={0.04}
+                duration={0.55}
               />
             ) : (
               "Walkthroughs highlighting key flows and hands-on guidance across the platform."
@@ -280,7 +291,7 @@ export default function CedrikManual() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                       <button
                         type="button"
-                        className="relative z-10"
+                        className="relative z-10 p-0 bg-transparent border-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black/40"
                         onClick={() => {
                           if (item.youtubeUrl) {
                             window.open(item.youtubeUrl, "_blank", "noopener,noreferrer");
@@ -300,16 +311,18 @@ export default function CedrikManual() {
               ))}
             </div>
 
-            {/* Navigation Buttons */}
+            {/* Navigation Buttons (Desktop) */}
             <button
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full p-3 hover:bg-white/20 transition-all duration-300"
+              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full p-3 hover:bg-white/20 transition-all duration-300"
+              aria-label="Previous slide"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full p-3 hover:bg-white/20 transition-all duration-300"
+              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full p-3 hover:bg-white/20 transition-all duration-300"
+              aria-label="Next slide"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -327,9 +340,29 @@ export default function CedrikManual() {
                 />
               ))}
             </div>
+
+            {/* Mobile Navigation */}
+            <div className="mt-24 flex md:hidden justify-center gap-4">
+              <button
+                type="button"
+                onClick={prevSlide}
+                className="px-5 py-2 rounded-full border border-white/15 bg-white/10 text-white text-xs uppercase tracking-[0.28em] shadow-[0_10px_24px_rgba(0,0,0,0.25)] hover:bg-white/20 transition-all"
+                aria-label="Previous slide"
+              >
+                Prev
+              </button>
+              <button
+                type="button"
+                onClick={nextSlide}
+                className="px-5 py-2 rounded-full border border-purple-300/30 bg-gradient-to-r from-purple-500/70 via-purple-600/80 to-purple-700/70 text-white text-xs uppercase tracking-[0.28em] shadow-[0_12px_28px_rgba(128,68,255,0.35)] hover:from-purple-500 hover:via-purple-600 hover:to-purple-800 transition-all"
+                aria-label="Next slide"
+              >
+                Next
+              </button>
+            </div>
           </div>
 
-          <Card className="walkthrough-banner mt-72 sm:mt-80 md:mt-96 lg:mt-[28rem] bg-white/5 backdrop-blur-xl border-white/10 overflow-hidden">
+          <Card className="walkthrough-banner mt-32 sm:mt-48 md:mt-80 lg:mt-[28rem] bg-white/5 backdrop-blur-xl border-white/10 overflow-hidden">
             <div className="relative">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(106,13,173,0.4),transparent_60%),radial-gradient(circle_at_85%_55%,rgba(160,90,255,0.22),transparent_55%)]" />
               <div className="absolute -right-28 -top-28 h-72 w-72 rounded-full bg-purple-500/25 blur-3xl" />
@@ -340,35 +373,30 @@ export default function CedrikManual() {
                     <p className="text-xs uppercase tracking-[0.35em] text-purple-200/70">
                       Full Walkthrough
                     </p>
-                    <div className="flex items-center justify-center sm:justify-start gap-3">
-                      <img
-                        src={auspiciaLogo}
-                        alt="Auspicia Systems logo"
-                        className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 p-1.5"
-                      />
-                      <div className="text-sm uppercase tracking-[0.3em] text-purple-100/70">
-                        Auspicia Systems
-                      </div>
-                    </div>
                     <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-white">
                       Deep dive into every CEDRIK workflow
                     </h3>
                     <p className="text-purple-100/75 text-sm sm:text-base leading-relaxed">
-                      Explore the complete playlist from Auspicia with guided sessions that
-                      cover onboarding, labs, admin controls, and security demonstrations.
+                      Explore the complete playlist with guided sessions that cover onboarding,
+                      labs, admin controls, and security demonstrations.
                     </p>
                   </div>
-                  <div className="flex flex-col items-center sm:items-start lg:items-end gap-6">
-                    <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3">
-                      <Youtube className="h-4 w-4 text-red-400" />
-                      <span className="text-[10px] uppercase tracking-[0.32em] text-purple-200/70">
-                        YouTube
-                      </span>
-                      <span className="h-5 w-px bg-white/15" />
-                      <span className="text-sm font-semibold text-white">Auspicia</span>
+                  <div className="flex flex-col items-center gap-5">
+                    <div className="w-full rounded-2xl border border-white/10 bg-white/5 shadow-[0_18px_45px_rgba(0,0,0,0.35)] overflow-hidden">
+                      <div className="relative w-full pt-[56.25%]">
+                        <iframe
+                          src="https://www.youtube-nocookie.com/embed/videoseries?si=g5YJlTLoxKBCxEpy&amp;list=PL-cy2GCLoxfLnMkoohCqadjggkXj8V5WO"
+                          title="CEDRIK full walkthrough playlist"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          allowFullScreen
+                          className="absolute inset-0 h-full w-full"
+                        />
+                      </div>
                     </div>
                     <Button
-                      className="w-full sm:w-auto bg-gradient-to-r from-purple-500 via-purple-600 to-purple-800 hover:from-purple-600 hover:via-purple-700 hover:to-purple-900 border-0 font-semibold px-6 py-6 h-auto rounded-full shadow-[0_16px_40px_rgba(128,68,255,0.35)]"
+                      className="w-full sm:w-auto self-center bg-gradient-to-r from-purple-500 via-purple-600 to-purple-800 hover:from-purple-600 hover:via-purple-700 hover:to-purple-900 border-0 font-semibold px-5 py-3 text-sm h-auto rounded-full shadow-[0_14px_32px_rgba(128,68,255,0.32)] focus-visible:ring-2 focus-visible:ring-purple-200/70"
                       onClick={() => {
                         window.open(
                           "https://www.youtube.com/playlist?list=PL-cy2GCLoxfLnMkoohCqadjggkXj8V5WO",
@@ -392,7 +420,13 @@ export default function CedrikManual() {
           <div className="performance-kicker">Benchmark Report</div>
           <h2 className="text-4xl sm:text-5xl font-bold performance-title">
             {performanceAnimKey > 0 ? (
-              <SplitText key={performanceAnimKey} text="Performance Analysis" />
+              <SplitText
+                key={performanceAnimKey}
+                text="Performance Analysis"
+                delay={0.25}
+                stagger={0.08}
+                duration={0.9}
+              />
             ) : (
               "Performance Analysis"
             )}
@@ -402,6 +436,9 @@ export default function CedrikManual() {
               <SplitText
                 key={performanceAnimKey + 1}
                 text="A quick look at system accuracy and reliability highlights, aligned with CEDRIK's learning and security objectives."
+                delay={0}
+                stagger={0.04}
+                duration={0.55}
               />
             ) : (
               "A quick look at system accuracy and reliability highlights, aligned with CEDRIK's learning and security objectives."
@@ -444,7 +481,13 @@ export default function CedrikManual() {
       <section id="capabilities" className="max-w-5xl mx-auto mt-40 space-y-8 relative scroll-mt-24 z-10">
         <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12">
           {capabilitiesAnimKey > 0 ? (
-            <SplitText key={capabilitiesAnimKey} text="CEDRIK Advantage" />
+            <SplitText
+              key={capabilitiesAnimKey}
+              text="CEDRIK Advantage"
+              delay={0.25}
+              stagger={0.08}
+              duration={0.9}
+            />
           ) : (
             "CEDRIK Advantage"
           )}
@@ -454,6 +497,9 @@ export default function CedrikManual() {
             <SplitText
               key={capabilitiesAnimKey + 1}
               text="A curated blend of AI guidance, practical labs, and admin oversight built for defense-ready learning."
+              delay={0}
+              stagger={0.04}
+              duration={0.55}
             />
           ) : (
             "A curated blend of AI guidance, practical labs, and admin oversight built for defense-ready learning."
